@@ -1,0 +1,13 @@
+
+{% load static %}
+{% load custom_filters %} 
+
+
+<!-- review_snippet.html -->
+<div class="review-snippet">
+    <h3><a href="{% url 'review_detail' review.id %}" style="text-decoration: none;">{{ review.headline }}</a></h3>
+    <p>Rating : {{ review.rating|generate_star_rating }}</p>
+    <p>{{ review.body }}</p>
+    <p>Date de création : {{ review.created_at|date:"d-m-Y H:i:s" }}</p>
+    
+</div>

@@ -1,0 +1,36 @@
+
+{% extends 'litreviewApp/base_bootstrap_logged_out.html' %}
+{% load static %}
+{% load bootstrap4 %}
+
+{% block content %}
+ <!-- Contenu spécifique de la page d'accueil -->
+ <br>
+ <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <!-- Lien pour s'inscrire, aligné à gauche -->
+    <a href="{% url 'create_user' %}" class="navbar-brand mr-auto btn btn-custom-bl"><i class="fas fa-user-plus fa-2x"></i> S'inscrire</a>
+    <!-- Un élément vide pour occuper l'espace restant et écarter les liens -->
+    <div class="flex-fill"></div>
+    <!-- Lien pour se connecter, aligné à droite -->
+    <a href="{% url 'login' %}" class="navbar-brand mr-auto btn btn-custom-bl "><i class="fas fa-sign-in-alt fa-2x "></i> Se connecter</a>
+</nav>
+
+
+<div class="d-flex align-items-center justify-content-center" style="height: 100vh;">
+    <div class="text-center">
+        <h1 class="btn-custom-bl">Welcome to LITReview web page!</h1>
+        <h2><p>Literary Criticism Application</p></h2>
+    </div>
+</div>
+{% endblock %}
+ 
+ {% comment %} <nav>
+    <a href="{% url 'create_user' %}" class="float-left"><i class="fas fa-user-plus fa-2x"></i>S'inscrire</a>
+    <a href="{% url 'login' %}"><i class="fas fa-sign-in-alt"></i>Se connecter</a>
+  </nav> {% endcomment %}
+ {% comment %} <nav>
+     <a href="{% url 'create_user' %}"class="mr-3"><i class="fas fa-user-plus fa-2x"></i>S'iinscrire</a>
+     <a href="{% url 'login' %}"><i class="fas fa-sign-in-alt"></i>Se connecter</a>
+ </nav> {% endcomment %}
+ <!-- Placez ici le contenu que vous souhaitez afficher sur la page d'-->
+    <!-- Votre contenu pour la page d'accueil ici -->

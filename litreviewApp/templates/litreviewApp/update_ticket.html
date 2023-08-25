@@ -1,0 +1,13 @@
+<!--update_ticket.html-->
+{% extends 'litreviewApp/base_bootstrap.html' %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h1>Mettre à jour le ticket</h1>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Mettre à jour</button>
+        </form>
+    </div>
+{% endblock %}

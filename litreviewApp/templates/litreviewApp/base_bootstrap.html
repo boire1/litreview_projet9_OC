@@ -1,0 +1,37 @@
+{% load static %}
+{% load bootstrap4 %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>LitReview</title>
+    <!-- Inclure les styles CSS de Bootstrap -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <div class="container text-center"> <!-- Ajouter la classe "text-center" pour centrer le contenu -->
+        <h1 class="my-5">LitReview</h1> <!-- Ajouter la classe "my-5" pour ajouter un espace au-dessus du titre -->
+
+        {% if user.is_authenticated %}
+            {% include 'litreviewApp/navbarlog.html' %}
+        {% endif %}
+
+        <div>
+            {% block content %}
+                <!-- Le contenu pour chaque page sera inséré ici -->
+            {% endblock %}
+        </div>
+    </div>
+
+    <!-- Inclure les scripts JS de Bootstrap, jQuery et Popper.js -->
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.9/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

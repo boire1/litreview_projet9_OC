@@ -1,0 +1,39 @@
+<!--create_ticket.html-->
+{% load static %}
+{% load bootstrap4 %}
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <title>Créer un ticket</title>
+    <!-- Inclure les styles CSS de Bootstrap -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <div class="container mt-5"> <!-- Ajouter la classe "container" pour centrer le contenu -->
+        <h1>Créer un ticket</h1>
+        <form method="post" enctype="multipart/form-data">  <!-- téléchargement d'image enctype="multipart/form-data" -->
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="title">Titre :</label>
+                <input type="text" id="title" name="title" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="description">Description :</label>
+                <textarea id="description" name="description" class="form-control" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="image">Image :</label>
+                <input type="file" id="image" name="image" class="form-control-file">  <!-- Champ d'upload pour l'image du billet -->
+            </div>
+            <button type="submit" class="btn btn-primary">Créer</button>
+        </form>
+    </div>
+
+    <!-- Inclure les scripts JS de Bootstrap, jQuery et Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.9/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

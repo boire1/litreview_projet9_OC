@@ -1,0 +1,30 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<div class="container mt-5">
+  <h1>Détails du ticket</h1>
+  <div class="card my-3">
+    <div class="card-body">
+      <h2 class="card-title">{{ ticket.title }}</h2>
+      <p class="card-text">Description: {{ ticket.description }}</p>
+      <p class="card-text">Créé par: {{ ticket.created_by }}</p>
+
+      <!-- Afficher l'image du ticket s'il y en a une -->
+      {% if ticket.image %}
+      <img
+        src="{{ ticket.image.url }}"
+        alt="{{ ticket.title }}"
+        class="img-fluid"
+      />
+      {% else %}
+      <p class="card-text">Pas d'image disponible</p>
+      {% endif %}
+
+      <!-- Ajoutez d'autres détails que vous souhaitez afficher pour le ticket -->
+
+      <a href="{% url 'flux' %}" class="btn btn-secondary mt-3">Retour flux</a>
+    </div>
+  </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.9/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+{% endblock %}

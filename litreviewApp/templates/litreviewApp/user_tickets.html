@@ -1,0 +1,45 @@
+<!-- user_tickets.html -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h1>Mes billets</h1>
+        <h2>Bienvenue <span class="distinctive-username">{{ user.username }}</span></h2>
+        <a href="{% url 'create_ticket' %}" class="btn btn-custom-bl">Créer un ticket</a>
+        <a href="{% url 'create_combined_ticket_review' %}" class="btn btn-custom-bl">Créer un billet et une critique</a>
+        {% for ticket in user_tickets %}
+            <div class="card my-3">
+                <div class="card-body">
+                    <h3 class="card-title">{{ ticket.title }}</h3>
+                    <p class="card-text">{{ ticket.description }}</p>
+                    <p class="card-text">Date de création : {{ ticket.created_at|date:"d-m-Y H:i:s" }}</p>
+                    {% if ticket.image %}
+                        <img src="{{ ticket.image.url }}" alt="{{ ticket.title }}" class="img-thumbnail" width="200">
+                    {% else %}
+                        <p class="card-text">Pas d'image disponible</p>
+                    {% endif %}
+
+                    {% if ticket.created_by == user %}
+                        <a href="{% url 'update_ticket' ticket_id=ticket.id %}" class="btn btn-dark">Modifier le ticket</a>
+                        <a href="{% url 'delete_ticket' ticket_id=ticket.id %}" class="btn btn-custom-yellow">Supprimer le ticket</a>
+                    {% else %}
+                        <a href="{% url 'create_review' ticket_id=ticket.id %}" class="btn btn-primary">Créer une revue</a>
+                    {% endif %}
+
+                    {% if ticket.reviews %}
+                        <h4>Revues associées :</h4>
+                        <ul>
+                            {% for review in ticket.reviews %}
+                                <li>{{ review.headline }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    {% endblock %}
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.9/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

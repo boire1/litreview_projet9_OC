@@ -1,0 +1,18 @@
+<!-- ticket_snippet.html -->
+<div class="ticket-snippet">
+    <h3><a href="{% url 'ticket_detail' ticket.id %}" style="text-decoration: none;">{{ ticket.title }}</a></h3>
+    <p>{{ ticket.description }}</p>
+    <p>Auteur : {{ ticket.created_by }}</p>
+    <p>Date de création : {{ ticket.created_at|date:"d-m-Y H:i:s" }}</p>
+    
+    <!-- Utilisez le filtre generate_star_rating pour afficher le rating sous forme d'étoiles -->
+    <div class="star-rating">
+        {% comment %} {{ ticket.rating|generate_star_rating }} {% endcomment %}
+    </div>
+     
+    {% if ticket.image %}
+        <img src="{{ ticket.image.url }}" alt="{{ ticket.title }}" class="img-thumbnail" width="200">
+    {% else %}
+        <p>Pas d'image disponible</p>
+    {% endif %}
+</div>

@@ -1,0 +1,17 @@
+{% extends 'litreviewApp/base_bootstrap.html' %}
+{%block content%}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <title>Supprimer la revue</title>
+</head>
+<body>
+    <h1>Supprimer la revue</h1>
+    <p>Êtes-vous sûr de vouloir supprimer cette revue <span class="distinctive-username">"{{ review.headline }}</span> "?</p>
+    <form method="POST" action="{% url 'delete_review' review_id=review.id %}">
+        {% csrf_token %}
+        <input type="submit" class = "btn btn-danger"  value="Supprimer">
+    </form>
+</body>
+</html>
+{%endblock%}

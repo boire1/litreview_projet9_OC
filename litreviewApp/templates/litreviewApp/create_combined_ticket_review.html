@@ -1,0 +1,16 @@
+<!-- create_combined_ticket_review.html -->
+{% extends 'base.html' %}
+{% load static %}
+{% load bootstrap4 %}
+
+{% block content %}
+  <h1 class="text-center">Créer un Billet et une Critique</h1>
+
+  <p>Auteur de la review : {{ user.username }}</p> <!-- Ajoutez cette ligne pour afficher le nom de l'auteur -->
+
+  <form method="post" class="w-50 mx-auto" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Créer le Billet et la Critique</button>
+  </form>
+{% endblock %}

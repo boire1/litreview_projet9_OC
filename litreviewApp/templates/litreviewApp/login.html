@@ -1,0 +1,25 @@
+<!-- login.html -->
+{% extends 'litreviewApp/base_bootstrap_logged_out.html' %}
+{% load static %}
+{% load bootstrap4 %}
+
+{% block content %}
+    <div class="container">
+        <h1 class="text-center" >Se connecter</h1>
+        {% if error_message %}
+            <div class="alert alert-danger" role="alert">
+                {{ error_message }}
+            </div>
+        {% endif %}
+        <form method="post" class="w-50 mx-auto">
+            {% csrf_token %}
+            <label for="username">Nom d'utilisateur:</label>
+            <input type="text" id="username" name="username" required class="form-control">
+            <br>
+            <label for="password">Mot de passe:</label>
+            <input type="password" id="password" name="password" required class="form-control">
+            <br>
+            <button type="submit" class="btn btn-custom-bl btn-block">Se connecter</button>
+        </form>
+    </div>
+{% endblock %}

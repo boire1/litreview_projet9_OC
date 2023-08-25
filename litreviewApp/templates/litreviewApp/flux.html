@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load custom_filters %} 
+
+{% block content %}
+    <div class="container mt-5">
+        <h1>Flux</h1>
+        <h2>Bienvenue <span class="distinctive-username">{{ user.username }}</span></h2>
+        <form method="GET" action="{% url 'search_tickets' %}" class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" name="search_query" placeholder="Rechercher un ticket par titre" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Rechercher</button>
+        </form>
+        <div class="contain">
+            <a href="{% url 'create_ticket' %}" class="btn btn-custom-bl">Créer un ticket</a>
+            <a href="{% url 'create_combined_ticket_review' %}" class="btn btn-custom-bl">Créer un billet et une critique</a>
+        </div>
+        
+        <!-- Afficher les résultats -->
+        <p>Tickets count: {{ tickets_count }}</p>
+        <p>Following tickets count: {{ following_tickets_count }}</p>
+        <p>Reviews count: {{ reviews_count }}</p>
+        <p>Following reviews count: {{ following_reviews_count }}</p>
+        <p>Other reviews count: {{ other_reviews_count }}</p>
+        <form method="post" action="{% url 'follow_user' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="follow_username">Nom d'utilisateur à suivre:</label>
+                <input type="text" id="follow_username" name="follow_username" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Suivre l'utilisateur</button>
+        </form> 
+        <br>
+        <a href="{% url 'create_reviewstand'  %}" class="btn btn-custom-red">Créer une Revue Autonome</a>
+       <!-- À l'intérieur de la boucle for post in posts -->
+        {% for post in posts %}
+            {% if post.content_type == 'TICKET' %}
+                <div class="card my-3">
+                    <div class="card-body">
+                        <!-- Utilisez l'inclusion pour afficher les détails du ticket -->
+                        {% include 'litreviewApp/ticket_snippet.html' with ticket=post %}
+                        <!-- Ajouter le bouton "Modifier le ticket" et "Supprimer le ticket" -->
+                        {% if post.created_by == request.user %}
+                            <a href="{% url 'update_ticket' ticket_id=post.id %}" class="btn btn-success">Modifier le ticket</a>
+                            <a href="{% url 'delete_ticket' ticket_id=post.id %}" class="btn btn-custom-red">Supprimer le ticket</a>
+                            
+                        
+                            {% endif %}
+                    </div>
+                </div>
+            {% elif post.content_type == 'REVIEW' %}
+                <div class="card my-3">
+                    <div class="card-body">
+                        <!-- Utilisez l'inclusion pour afficher les détails de la revue -->
+                        {% include 'litreviewApp/review_snippet.html' with review=post %}
+                        <!-- Ajouter l'affichage du nom de l'auteur -->
+                        <p>Auteur : {{ post.created_by }}</p>
+                        <!-- Afficher le bouton "Modifier la revue" uniquement pour l'auteur de la revue -->
+                        {% if post.created_by == request.user %}
+                           
+                        <a href="{% url 'update_review' review_id=post.id %}" class="btn btn-info">Modifier la revue</a>
+                        <a href="{% url 'delete_review' review_id=post.id %}" class="btn btn-warning">Supprimer la revue</a>
+                        {% endif %}
+                        <!-- ... Autres parties du template pour les revues ... -->
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+        <a id="back-to-top" href="#top">&#9650;</a>
+            
+        </a>
+        <link rel="stylesheet" href="{% static 'js/jvscript.js' %}">
+    </div>
+{% endblock %}
+
+

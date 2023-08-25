@@ -1,0 +1,37 @@
+<!-- user_following_view.html -->
+{% extends 'base.html' %} {% block content %}
+<h1>fluxxx, Abonnements et Abonnés</h1>
+<div style="display: flex; flex-wrap: wrap">
+  <div style="width: 33%; padding: 10px">
+    <h2>Utilisateurs que je suis</h2>
+    <ul>
+      {% for following_user in following_users %}
+      <li>
+        {{ following_user.followed_user.username }}
+        <form method="post" action="{% url 'unfollow_user' %}">
+          {% csrf_token %}
+          <input
+            type="hidden"
+            name="follow_username"
+            value="{{ following_user.followed_user.username }}"
+          />
+          <button type="submit">Désabonner</button>
+        </form>
+      </li>
+      {% empty %}
+      <li>Je ne suis aucun utilisateur</li>
+      {% endfor %}
+    </ul>
+  </div>
+  <div style="width: 33%; padding: 10px">
+    <h2>Utilisateurs abonnés</h2>
+    <ul>
+      {% for follower in followers %}
+      <li>{{ follower.username }}</li>
+      {% empty %}
+      <li>Aucun utilisateur abonné</li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endblock %}

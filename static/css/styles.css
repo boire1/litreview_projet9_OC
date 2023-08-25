@@ -1,0 +1,104 @@
+/* styles.css */
+
+/* Bouton rouge */
+
+.btn-custom-red {
+    background-color: #5c912a;
+    color: #FFFFFF;
+    border-color: #57881f;
+}
+
+/* Bouton bleu */
+.btn-custom-yellow {
+    background-color: #da33ff;
+    color: #FFFFFF;
+    border-color: #da33ff;
+}
+
+/* Bouton bleuciel */
+.btn-custom-bl {
+    background-color: #33e7ff;
+    color: #FFFFFF;
+    border-color: #33e7ff;
+}
+
+/* Bouton ble */
+.btn-custom-bl {
+    background-color: #938e8e;
+    color: #FFFFFF;
+    border-color: #938e8e;
+}
+
+.distinctive-username {
+    color: #00d9ff; /* Remplacez #ff0000 par la couleur que vous souhaitez utiliser */
+    /* Ajoutez d'autres styles CSS pour personnaliser l'apparence du nom d'utilisateur */
+}
+.distinctive-litreviewBase {
+    color: #a2a6a6; /* Remplacez #ff0000 par la couleur que vous souhaitez utiliser */
+    /* Ajoutez d'autres styles CSS pour personnaliser l'apparence du nom d'utilisateur */
+}
+a {
+    text-decoration: none;
+  }
+
+.container.text-center a.card-title {
+    text-decoration: none;
+  }
+
+.color-create {
+    color: #266969; /* Remplacez #ff0000 par la couleur que vous souhaitez utiliser */
+    /* Ajoutez d'autres styles CSS pour personnaliser l'apparence du nom d'utilisateur */
+}
+
+btn-custom-blo {
+    background-color: #e8b4b4;
+    color: #FFFFFF;
+    border-color: #e8b4b4;
+}
+
+/* Style du bouton lorsque la souris passe dessus */
+.btn-custom-blo:hover {
+    background-color: #ff0000; /* Nouvelle couleur de fond lors du survol */
+    color: #FFFFFF; /* Nouvelle couleur du texte lors du survol */
+    border-color: #ff0000; /* Nouvelle couleur de la bordure lors du survol */
+}
+
+#custom-title {
+    color: #266969; /* Couleur du texte du titre */
+}
+#custom-bordeaux {
+    color: #7a3270; /* Couleur du texte du titre */
+}
+
+#custom-vert {
+    color: #326d7a; /* Couleur du texte du titre */
+}
+.contain {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Optional: If you want to vertically center the elements */
+}
+
+.contain_l_end_r {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+#back-to-top {
+    display: none;
+    position: fixed;
+    bottom: -20px;
+    right: 20px;
+    z-index: 1000;
+    font-size: 24px;
+    color: #333;
+    background-color: #fff;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    cursor: pointer;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}

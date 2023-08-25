@@ -1,0 +1,69 @@
+<!-- ticket_list.html -->
+{% extends 'base.html' %}
+{% load static %}
+{% load custom_filters %} 
+{% block content %}
+    <div class="container mt-5">
+        <h1>Liste des Tickets</h1>
+        <h4>Espace réservé au profil de {{ user.username }}</h4>
+        <a href="{% url 'create_ticket' %}" class="btn btn-primary">Créer un ticket</a>
+        <a href="{% url 'create_combined_ticket_review' %}" class="btn btn-primary">Créer un billet et une critique</a><br>
+        <br>
+        <form method="GET" action="{% url 'search_tickets' %}" class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" name="search_query" placeholder="Rechercher un ticket par titre" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Rechercher</button>
+        </form>
+        {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+        {% for ticket in tickets %}
+        <div class="card my-3">
+            <div class="card-body">
+                <h3 class="card-title"><a href="{% url 'ticket_detail' ticket.id %}"style="text-decoration: none;">{{ ticket.title }}</a></h3>
+                <p class="card-text">Description: {{ ticket.description }}</p>
+                <p class="card-text">Créé par: {{ ticket.created_by }}</p>
+                <p class="card-text">Date de création : {{ ticket.created_at|date:"d-m-Y H:i:s" }}</p>
+                
+                <!-- Utilisez le filtre generate_star_rating pour afficher le rating sous forme d'étoiles -->
+                <div class="star-rating">
+                    {{ ticket.rating|generate_star_rating }}
+                </div>
+    
+                {% if ticket.created_by == user %}
+                    <a href="{% url 'update_ticket' ticket_id=ticket.id %}" class="btn btn-success">Modifier le ticket</a>
+                    <a href="{% url 'delete_ticket' ticket_id=ticket.id %}" class="btn btn-custom-red">Supprimer le ticket</a>
+                {% else %}
+                    {% if not ticket.user_has_review %}
+                        <a href="{% url 'create_review' ticket_id=ticket.id %}" class="btn btn-primary">Créer une revue</a>
+                    {% endif %}
+                {% endif %}
+    
+                {% if ticket.image %}
+                    <img src="{{ ticket.image.url }}" alt="{{ ticket.title }}" class="img-thumbnail" width="200">
+                {% else %}
+                    <p class="card-text">Pas d'image disponible</p>
+                {% endif %}
+    
+                <!-- Afficher les revues associées au ticket -->
+                {% for review in ticket.review_set.all %}
+                    <div class="review">
+                        <h4>Revues :</h4>
+                        <p>Rating : {{ review.rating|generate_star_rating }}</p>
+                        <p>Titre :<a href="{% url 'review_detail' review.id %}" class="text-dark">{{ review.headline }}</a></p>
+                        <p>Body : {{ review.body }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.9/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    {% endfor %}
+{%endblock%}
+    
+    

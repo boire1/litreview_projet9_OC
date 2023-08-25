@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <title>Suivre l'utilisateur</title>
+</head>
+<body>
+    <h1>Suivre l'utilisateur</h1>
+    <form method="post" action="{% url 'follow_user' user_id=user.id %}">
+        {% csrf_token %}
+        <button type="submit">Suivre</button>
+    </form>
+</body>
+</html>

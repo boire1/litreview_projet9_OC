@@ -1,0 +1,26 @@
+{% extends 'litreviewApp/base_bootstrap.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <title>Supprimer le ticket</title>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header">
+                <h1>Supprimer le ticket</h1>
+            </div>
+            <div class="card-body">
+                <p>Voulez-vous vraiment supprimer le ticket "{{ ticket.title }}" ?</p>
+                <form method="POST" action="{% url 'delete_ticket' ticket_id=ticket.id %}">
+                    {% csrf_token %}
+                    <input type="submit" class="btn btn-danger" value="Supprimer">
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+{% endblock %}

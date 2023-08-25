@@ -1,0 +1,17 @@
+<!-- followers.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Abonnés</title>
+</head>
+<body>
+    <h1>Abonnés</h1>
+    <ul>
+        {% for user in followers %}
+            <li>{{ user.username }}</li>
+        {% empty %}
+            <li>Aucun abonné</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
