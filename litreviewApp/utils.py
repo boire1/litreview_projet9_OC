@@ -68,12 +68,12 @@ def authenticate_user(request):
         return render(request, "litreviewAPP/login.html")
 
 
-def user_profile_login_view(request):
-    if request.user.is_authenticated:
-        username = request.user.username
-        return render(request, "litreviewAPP/user_profile.html", {"username": username})
-    else:
-        return redirect("login")
+# def user_profile_login_view(request):
+#     if request.user.is_authenticated:
+#         username = request.user.username
+#         return render(request, "litreviewAPP/user_profile.html", {"username": username})
+#     else:
+#         return redirect("login")
 
 
 def logout_user(request):

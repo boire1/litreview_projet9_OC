@@ -7,7 +7,7 @@ from django.urls import reverse
 from .forms import TicketForm
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import CreateReviewForm, UpdateReviewForm
-from .models import Ticket, Review, UserFollows, TicketReviewResponse
+from .models import Ticket, Review, UserFollows
 from django.contrib.auth import logout
 from .forms import CombinedTicketReviewForm
 from PIL import Image
@@ -146,29 +146,6 @@ def review_detail(request, review_id):
 
 # ---------------------------------------------review-------------------------------------------
 
-# userfollowers
-
-
-@login_required
-def user_followers(request):
-    user = request.user
-    followers = UserFollows.objects.filter(followed_user=user)
-    return render(request, "litreviewApp/user_followers.html", {"followers": followers})
-
-
-@login_required
-def user_following(request):
-    user = request.user
-    following_users = UserFollows.objects.filter(created_by=user).select_related(
-        "followed_user"
-    )
-
-    return render(
-        request,
-        "litreviewApp/user_following.html",
-        {"following_users": following_users},
-    )
-
 
 """afficher la liste des utilisateurs suivis par l'utilisateur connecté """
 
@@ -252,33 +229,6 @@ def unfollow_user(request):
 
 
 @login_required
-def user_profile_view(request):
-    user = request.user
-    following_users = UserFollows.objects.filter(created_by=user).values_list(
-        "followed_user", flat=True
-    )
-    followers = UserFollows.objects.filter(followed_user=user).values_list(
-        "created_by", flat=True
-    )
-
-    # Récupérer les tickets des utilisateurs suivis
-    following_tickets = Ticket.objects.filter(created_by__in=following_users).order_by(
-        "-created_at"
-    )
-
-    return render(
-        request,
-        "litreviewApp/user_profile.html",
-        {
-            "user": user,
-            "following_users": following_users,
-            "followers": followers,
-            "following_tickets": following_tickets,
-        },
-    )
-
-
-@login_required
 def delete_review(request, review_id):
     review = get_object_or_404(Review, id=review_id)
 
@@ -326,7 +276,7 @@ def create_combined_ticket_review(request):
             image_path = None
             if image:
                 ticket_image = Image.open(image)
-                ticket_image.thumbnail((50, 50))  # Définir la taille de la vignette
+                ticket_image.thumbnail((50, 50))
                 image_path = os.path.join("ticket_images", image.name)
                 ticket_image.save(os.path.join(settings.MEDIA_ROOT, image_path))
 
@@ -345,12 +295,6 @@ def create_combined_ticket_review(request):
                 created_by=request.user,
                 headline=form.cleaned_data["review_headline"],
                 body=form.cleaned_data["review_body"],
-            )
-
-            # Enregistrer la réponse associant le billet et la critique
-            response = TicketReviewResponse.objects.create(
-                ticket=ticket,
-                review=review,
             )
 
             # Ajouter le nom de l'auteur au contexte
