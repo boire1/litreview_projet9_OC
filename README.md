@@ -18,7 +18,7 @@ The application offers the following features:
     In your directory, open the console.
 
     Clone this repository.
-`https://github.com/boire1/litreview_projet9_OC.git`
+`git clone https://github.com/boire1/litreview_projet9_OC.git`
 
 2. Navigate to the project directory: `cd openclassProject9II\litreview`.
 
