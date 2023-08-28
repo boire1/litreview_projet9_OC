@@ -20,9 +20,10 @@ The application offers the following features:
     Clone this repository.
 `git clone https://github.com/boire1/litreview_projet9_OC.git`
 
-2. Navigate to the project directory: `cd openclassProject9II\litreview`.
+2. Navigate to the project directory: `cd litreview_projet9_OC
+`.
 
-    In this directory `openclassProject9II\litreview`, create a virtual environment.
+    In this directory `litreview_projet9_OC`, create a virtual environment.
 
     Type: `python -m venv env`.
 
@@ -34,13 +35,9 @@ The application offers the following features:
 
 ## Usage
 
-1.    Run `python manage.py makemigrations`.
+1.    Start the development server: `python manage.py runserver`.
 
-2.    Run the migrations: `python manage.py migrate`.
-
-3.    Start the development server: `python manage.py runserver`.
-
-4.   Retrieve the address `http://127.0.0.1`, then paste it into our browser.
+2.   Retrieve the address `http://127.0.0.1`, then paste it into our browser.
 
 ## Features
 
