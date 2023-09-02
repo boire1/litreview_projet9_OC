@@ -425,9 +425,9 @@ def flux(request):
     # Get the connected user
     user = request.user
 
-    # Obtain tickets from the logged-in user and from the users to whom the logged-in user is subscribed.
+   
     following_users = user.following_users.values("followed_user")
-  
+    # Obtain tickets from the logged-in user and from the users to whom the logged-in user is subscribed.
     user_tickets = Ticket.objects.filter(
         Q(created_by=user) | Q(created_by__in=following_users)
     )

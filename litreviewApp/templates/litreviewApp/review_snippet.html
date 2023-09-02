@@ -4,10 +4,12 @@
 
 
 <!-- review_snippet.html -->
+<!-- review_snippet.html -->
 <div class="review-snippet">
-    <h3><a href="{% url 'review_detail' review.id %}" style="text-decoration: none;">{{ review.headline }}</a></h3>
-    <p>Rating : {{ review.rating|generate_star_rating }}</p>
+    <p style="text-align: right;">  {{ review.created_at|date:"d-m-Y" }}</p>
+    <h3 style="display: inline-block; margin-right: 10px;"><a href="{% url 'review_detail' review.id %}" style="text-decoration: none;">{{ review.headline }}</a></h3>
+    <p style="display: inline-block;">{{ review.rating|generate_star_rating }}</p>
+    
     <p>{{ review.body }}</p>
-    <p>Date de création : {{ review.created_at|date:"d-m-Y H:i:s" }}</p>
     
 </div>
