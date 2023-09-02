@@ -9,11 +9,13 @@
         <a href="{% url 'create_ticket' %}" class="btn btn-custom-bl">Créer un ticket</a>
         <a href="{% url 'create_combined_ticket_review' %}" class="btn btn-custom-bl">Créer un billet et une critique</a>
         {% for ticket in user_tickets %}
-            <div class="card my-3">
+            <div class="card my-3 card-custom"> <!-- Ajoutez la classe card-custom ici -->
+                <div class="date">
+                    {{ ticket.created_at|date:"d-m-Y " }}
+                </div>
                 <div class="card-body">
                     <h3 class="card-title">{{ ticket.title }}</h3>
                     <p class="card-text">{{ ticket.description }}</p>
-                    <p class="card-text">Date de création : {{ ticket.created_at|date:"d-m-Y H:i:s" }}</p>
                     {% if ticket.image %}
                         <img src="{{ ticket.image.url }}" alt="{{ ticket.title }}" class="img-thumbnail" width="200">
                     {% else %}
@@ -39,7 +41,4 @@
             </div>
         {% endfor %}
     </div>
-    {% endblock %}
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.9/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+{% endblock %}
